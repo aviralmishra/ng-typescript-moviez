@@ -29,7 +29,9 @@ Once the tools are available, run the following commands to get the application 
 4. http-server
 
 Once the http-server is running, point the browser to any of the links below:
+
 http://127.0.0.1:8080
+
 http://127.0.0.1:8080/#/search/Memento
 
 ## To do
