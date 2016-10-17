@@ -35,3 +35,6 @@ http://127.0.0.1:8080/#/search/Memento
 ## To do
 
 1. Add type script linting
+2. Generate JS files in a different directory and do not check-in.
+3. Provide a way to transpile TypeScript files to JavaScript files outside of Visual Studio Code
+
