@@ -1,0 +1,96 @@
+<!-- Search -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <form class="form-horizontal" role="form" ng-submit="pm.searchTitle()">
+        <div class="form-group">
+          <div class="col-md-9">
+            <input type="search" class="form-control" size="30" placeholder="Search title..." ng-model="pm.query">
+          </div>
+          <div class="col-md-3">
+            <input type="submit" name="searchForm" value="Search" class="button-primary" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Search Results -->
+<div class="container" ng-if="pm.response">
+  <div class="row equal-height-panels" ng-repeat="movie in pm.movies">
+    <div class="col-md-12">
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <i class="fa fa-file-video-o" aria-hidden="true"></i> {{movie.Title}}
+          </div>
+          <div class="panel-body">
+            <img ng-src="{{movie.Poster}}" class="img-responsive" style="width:100%" alt="Image" />
+          </div>
+          <div class="panel-footer">
+            <a class="btn btn-danger" ng-click="pm.addToFavourites(movie)" ng-if="!pm.isFavourite(movie.imdbID)">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn-success" ng-click="" ng-if="pm.isFavourite(movie.imdbID)">
+              <i class="fa fa-heart" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Year</td>
+                <td>{{movie.Year}}</td>
+              </tr>
+              <tr>
+                <td>Rated</td>
+                <td>{{movie.Rated}}</td>
+              </tr>
+              <tr>
+                <td>Released</td>
+                <td>{{movie.Released}}</td>
+              </tr>
+              <tr>
+                <td>Runtime</td>
+                <td>{{movie.Runtime}}</td>
+              </tr>
+              <tr>
+                <td>Genre</td>
+                <td>{{movie.Genre}}</td>
+              </tr>
+              <tr>
+                <td>Director</td>
+                <td>{{movie.Director}}</td>
+              </tr>
+              <tr>
+                <td>Actors</td>
+                <td>{{movie.Actors}}</td>
+              </tr>
+              <tr>
+                <td>Plot</td>
+                <td>{{movie.Plot}}</td>
+              </tr>
+              <tr>
+                <td>IMDB</td>
+                <td>{{movie.imdbRating}} based on {{movie.imdbVotes}} votes</td>
+              </tr>
+              <tr>
+                <td>IMDB</td>
+                <td>http://www.imdb.com/title/{{movie.imdbID}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="pm.error">
+    <div class="alert alert-danger">
+      Error: {{pm.error}} for search with {{pm.query}}. Please retry.
+    </div>
+  </div>
+</div>

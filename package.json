@@ -1,0 +1,19 @@
+{
+  "name": "moviez",
+  "version": "0.1.0",
+  "description": "Moviez allows users to search for movies and add them to their favourite list.",
+  "authors": [
+    "Aviral Mishra"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/aviralmishra/ng-typescript-moviez",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aviralmishra/ng-typescript-moviez.git"
+  },
+  "scripts": {
+    "init": "npm install"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,17 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/*.js": true,
+    "**/node_modules": false,
+    "**/bower_components": false,
+    "**/apache-tomcat*": true,
+    "**/*.map": true,
+    "**/*.tmp": false,
+    "**/dist": false
+  },
+  "formatOnSave.on": true,
+  "formatOnSave.extensions": ["*"],
+  "files.autoSave": "onFocusChange",
+  "terminal.external.osxExec": "iTerm.app"
+}

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <p>
+        <a class="btn btn-primary" ng-click="pm.goBack()">
+          <i class="fa fa-hand-o-left" aria-hidden="true"></i> Back
+        </a>
+        <p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <!-- Favourites -->
+  <div class="row equal-height-panels" ng-if="pm.favourites.length > 0">
+    <div class="col-md-4" ng-repeat="movie in pm.favourites">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <i class="fa fa-file-video-o" aria-hidden="true"></i> {{movie.Title}}
+        </div>
+        <div class="panel-body">
+          <img ng-src="{{movie.Poster}}" class="img-responsive" style="width:100%" alt="Image" />
+          <div class="header">
+            <strong class="primary-font">{{movie.Genre}}</strong>
+            <small class="pull-right text-muted">{{movie.Year}}</small>
+          </div>
+          <p class="text-justify">{{movie.Plot}}</p>
+        </div>
+        <div class="panel-footer">
+          <a class="btn btn-primary" ng-click="">
+            <i class="fa fa-file-video-o" aria-hidden="true"></i> {{movie.imdbRating}} / {{movie.imdbVotes}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No favourites -->
+  <div class="row" ng-if="pm.favourites.length === 0">
+    <div class="col-md-12">
+      <div class="alert alert-info">
+        There are no items in your favourites list currently.
+      </div>
+    </div>
+  </div>
+</div>
