@@ -24,12 +24,13 @@ module app.search {
     error: string;
     movies: app.common.model.IMovie[];
 
-    static $inject: Array<string> = ['$q', '$location', '$routeParams', 'searchService', 'favouritesService'];
+    static $inject: Array<string> = ['$q', '$location', '$routeParams', 'searchService', 'favouritesService', 'logger'];
     constructor(private $q: ng.IQService,
       private $location: ng.ILocationService,
       private $routeParams: ISearchParams,
       private _searchService: app.common.SearchService,
-      private _favouritesService: app.common.FavouritesService) {
+      private _favouritesService: app.common.FavouritesService,
+      private _logger: app.common.Logger) {
 
       this.title = 'Search';
       this.response = false;
@@ -38,12 +39,13 @@ module app.search {
       this.movies = [];
 
       if (this.query) {
+        var self = this;
         var promises = [this.searchTitle()];
         this.$q.all(promises).then(function () {
-          console.log('Loaded Search Results View.');
+          self.activate('Loaded Search Results View.');
         });
       } else {
-        console.log('Loaded Search View.');
+        this.activate('Loaded Search View.');
       }
     }
 
@@ -69,10 +71,15 @@ module app.search {
 
     addToFavourites(favoured: app.common.model.IMovie) {
       this._favouritesService.addToFavourites(favoured);
+      this._logger.success(favoured.Title + " is added to favourites list.");
     }
 
     isFavourite(imdbID: string) {
       return this._favouritesService.isFavourite(imdbID);
+    }
+
+    private activate(msg: string) {
+      this._logger.info(msg);
     }
 
     private getTitles(response) {

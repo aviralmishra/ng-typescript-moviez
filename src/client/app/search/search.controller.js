@@ -3,25 +3,27 @@ var app;
     var search;
     (function (search) {
         var SearchCtrl = (function () {
-            function SearchCtrl($q, $location, $routeParams, _searchService, _favouritesService) {
+            function SearchCtrl($q, $location, $routeParams, _searchService, _favouritesService, _logger) {
                 this.$q = $q;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
                 this._searchService = _searchService;
                 this._favouritesService = _favouritesService;
+                this._logger = _logger;
                 this.title = 'Search';
                 this.response = false;
                 this.query = $routeParams.query;
                 this.error = '';
                 this.movies = [];
                 if (this.query) {
+                    var self = this;
                     var promises = [this.searchTitle()];
                     this.$q.all(promises).then(function () {
-                        console.log('Loaded Search Results View.');
+                        self.activate('Loaded Search Results View.');
                     });
                 }
                 else {
-                    console.log('Loaded Search View.');
+                    this.activate('Loaded Search View.');
                 }
             }
             SearchCtrl.prototype.searchTitle = function () {
@@ -44,9 +46,13 @@ var app;
             };
             SearchCtrl.prototype.addToFavourites = function (favoured) {
                 this._favouritesService.addToFavourites(favoured);
+                this._logger.success(favoured.Title + " is added to favourites list.");
             };
             SearchCtrl.prototype.isFavourite = function (imdbID) {
                 return this._favouritesService.isFavourite(imdbID);
+            };
+            SearchCtrl.prototype.activate = function (msg) {
+                this._logger.info(msg);
             };
             SearchCtrl.prototype.getTitles = function (response) {
                 var results = response.filter(function (result) {
@@ -62,7 +68,7 @@ var app;
                 }(this._searchService, titles));
                 return titles;
             };
-            SearchCtrl.$inject = ['$q', '$location', '$routeParams', 'searchService', 'favouritesService'];
+            SearchCtrl.$inject = ['$q', '$location', '$routeParams', 'searchService', 'favouritesService', 'logger'];
             return SearchCtrl;
         }());
         angular

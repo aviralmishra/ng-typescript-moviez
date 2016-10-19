@@ -3,12 +3,13 @@ var app;
     var favourites;
     (function (favourites) {
         var FavouritesCtrl = (function () {
-            function FavouritesCtrl($window, _favouritesService) {
+            function FavouritesCtrl($window, _favouritesService, _logger) {
                 this.$window = $window;
                 this._favouritesService = _favouritesService;
+                this._logger = _logger;
                 this.title = "My Favourites";
                 this.favourites = _favouritesService.getFavourites();
-                console.log('Loaded My Favourites View.');
+                this.activate('Loaded My Favourites View.');
             }
             FavouritesCtrl.prototype.getFavourites = function () {
                 this.favourites = this._favouritesService.getFavourites();
@@ -17,7 +18,10 @@ var app;
             FavouritesCtrl.prototype.goBack = function () {
                 this.$window.history.back();
             };
-            FavouritesCtrl.$inject = ['$window', 'favouritesService'];
+            FavouritesCtrl.prototype.activate = function (msg) {
+                this._logger.info(msg);
+            };
+            FavouritesCtrl.$inject = ['$window', 'favouritesService', 'logger'];
             return FavouritesCtrl;
         }());
         angular

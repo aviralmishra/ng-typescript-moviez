@@ -40,3 +40,10 @@ http://127.0.0.1:8080/#/search/Memento
 2. Generate JS files in a different directory and do not check-in.
 3. Provide a way to transpile TypeScript files to JavaScript files outside of Visual Studio Code
 
+## Notes
+
+1. To add more typings from definitely typed:
+
+```
+tsd install angular --resolve --save
+```
